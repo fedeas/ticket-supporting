@@ -26,12 +26,12 @@ class CustomerTicketReceivedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Επιβεβαίωση Παραλαβής Δελτίου Βλάβης - ' . ($this->ticket->reference_number ?? ''))
-            ->greeting('Γεια σας ' . $notifiable->name . ',')
+            ->subject('Επιβεβαίωση Παραλαβής Δελτίου Βλάβης - '.($this->ticket->reference_number ?? ''))
+            ->greeting('Γεια σας '.$notifiable->name.',')
             ->line('Έχουμε παραλάβει το δελτίο βλάβης σας.')
             ->line('Η ομάδα μας θα το εξετάσει το συντομότερο δυνατό.')
-            ->line('Αριθμός Δελτίου: ' . ($this->ticket->reference_number ?? '—'))
-            ->line('Θέμα: ' . ($this->ticket->title ?? '—'))
+            ->line('Αριθμός Δελτίου: '.($this->ticket->reference_number ?? '—'))
+            ->line('Θέμα: '.($this->ticket->title ?? '—'))
             ->action('Προβολή Δελτίου', route('customer.tickets.show', $this->ticket))
             ->line('Ευχαριστούμε.');
     }

@@ -14,8 +14,7 @@ class TicketNoteAddedNotification extends Notification
     public function __construct(
         public Ticket $ticket,
         public string $note,
-    ) {
-    }
+    ) {}
 
     public function via(object $notifiable): array
     {

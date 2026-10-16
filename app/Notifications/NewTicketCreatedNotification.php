@@ -12,9 +12,7 @@ class NewTicketCreatedNotification extends Notification
 {
     use Queueable;
 
-    public function __construct(public Ticket $ticket)
-    {
-    }
+    public function __construct(public Ticket $ticket) {}
 
     public function via(object $notifiable): array
     {

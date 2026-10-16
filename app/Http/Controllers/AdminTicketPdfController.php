@@ -16,7 +16,7 @@ class AdminTicketPdfController extends Controller
         ])->setPaper('a4', 'portrait');
 
         $safeNumber = str_replace(['/', '\\'], '-', $ticket->registration_number ?: (string) $ticket->id);
-        $filename = 'ticket-' . $safeNumber . '.pdf';
+        $filename = 'ticket-'.$safeNumber.'.pdf';
 
         return $pdf->download($filename);
     }

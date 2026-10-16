@@ -16,8 +16,7 @@ class TicketStatusChangedNotification extends Notification
         public string $oldStatus,
         public string $newStatus,
         public ?string $note = null,
-    ) {
-    }
+    ) {}
 
     public function via(object $notifiable): array
     {

@@ -24,6 +24,7 @@ new class extends Component {
     {
         return [
             'tickets' => Ticket::query()
+                ->where('customer_id', auth()->id())
                 ->with('customer')
                 ->when($this->status !== '', fn ($q) => $q->where('status', $this->status))
                 ->when($this->search !== '', function ($q) {

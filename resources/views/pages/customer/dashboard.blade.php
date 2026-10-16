@@ -19,7 +19,9 @@ new class extends Component {
 
     public function with(): array
     {
-        $recentTicketsQuery = Ticket::query()
+        $myTickets = fn () => Ticket::where('customer_id', auth()->id());
+
+        $recentTicketsQuery = $myTickets()
             ->with('customer')
             ->latest();
 
@@ -42,11 +44,11 @@ new class extends Component {
         }
 
         return [
-            'totalTickets' => Ticket::count(),
-            'backlogCount' => Ticket::where('status', 'backlog')->count(),
-            'inProgressCount' => Ticket::where('status', 'in_progress')->count(),
-            'doneCount' => Ticket::where('status', 'done')->count(),
-            'vehicleCount' => Ticket::whereNotNull('vehicle_registration')
+            'totalTickets' => $myTickets()->count(),
+            'backlogCount' => $myTickets()->where('status', 'backlog')->count(),
+            'inProgressCount' => $myTickets()->where('status', 'in_progress')->count(),
+            'doneCount' => $myTickets()->where('status', 'done')->count(),
+            'vehicleCount' => $myTickets()->whereNotNull('vehicle_registration')
                 ->where('vehicle_registration', '!=', '')
                 ->distinct('vehicle_registration')
                 ->count('vehicle_registration'),

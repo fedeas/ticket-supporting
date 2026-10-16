@@ -28,6 +28,8 @@ new class extends Component {
 
     public function mount(Ticket $ticket): void
     {
+        abort_unless($ticket->customer_id === auth()->id(), 403);
+
         $this->ticket = $ticket->load('customer');
 
         $this->fillReferenceParts($ticket->reference_number ?? '');
@@ -94,6 +96,8 @@ new class extends Component {
 
     public function save()
     {
+        abort_unless($this->ticket->customer_id === auth()->id(), 403);
+
         $this->validate([
             'reference_number_part_1' => ['required', 'string', 'max:50'],
             'reference_number_part_2' => ['required', 'string', 'max:50'],

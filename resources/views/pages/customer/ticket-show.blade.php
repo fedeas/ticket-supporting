@@ -8,6 +8,8 @@ new class extends Component {
 
     public function mount(Ticket $ticket): void
     {
+        abort_unless($ticket->customer_id === auth()->id(), 403);
+
         $this->ticket = $ticket->load(['customer', 'updates.admin']);
     }
 
